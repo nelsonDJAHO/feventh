@@ -1,0 +1,131 @@
+{% extends 'main/template.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+
+<!-- Start Breadcrumb Area -->
+<div class="breadcrumb-area" style="background-image: url('{% static 'main/assets/img/l5.jpg' %}');">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2>Contactez-Nous</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb Area -->
+
+<!-- Start Contact Area -->
+<section class="contact-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 align-self-center">
+                <div class="contact-form">
+                    <h2>Laissez-nous un message</h2>
+                    <form id="contactform">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="single-input">
+                                    <input type="text" id="last_name" required placeholder="Votre Nom" />
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single-input">
+                                    <input type="text" id="first_name" required placeholder="Votre prénom" />
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single-input">
+                                    <input type="email" id="email" required placeholder="Votre email" />
+                                    <i class="far fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single-input">
+                                    <input type="text" id="phone" required placeholder="Votre téléphone" />
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="single-input">
+                                    <input type="text" id="subject" required placeholder="Votre sujet" />
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="single-input">
+                                    <textarea id="message" required placeholder="Votre message"></textarea>
+                                    <i class="fas fa-pen"></i>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="button-1">Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="ajax-response"></p>
+                </div>
+            </div>
+            <div class="col-lg-4 align-self-center">
+                <div class="contact-form-info" style="background-image: url('assets/img/contact.jpg');">
+                    <h2>N'hésitez pas à nous contacter</h2>
+                    <div class="contact-info-list">
+                        <div class="item mb-20">
+                            <div class="icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Adresse</h4>
+                                {% for address in companyAddresses %}
+                                <p>{{ address.Address }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="item mb-20">
+                            <div class="icon">
+                                <i class="far fa-envelope"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Déposer un courrier</h4>
+                                {% for email in companyEmails %}
+                                <p>{{ email.Email }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Appelez-Nous</h4>
+                                {% for phonenumber in companyContacts %}
+                                <!--  -->
+                                {% if phonenumber.whatsapp %}
+                                <a href="https://wa.me/{{phonenumber.PhoneNumber}}?text=Bonjour FEVENTH" style="color:#fff; font-weight: normal; font-size: 15px;">{{ phonenumber.PhoneNumber }}</a><br>
+                                <!--  -->
+                                {% else %}
+                                <!--  -->
+                                <P style="font-size: 15px;">{{ phonenumber.PhoneNumber }}</P>
+                                <!--  -->
+                                {% endif %}
+                                <!--  -->
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Contact Area -->
+
+{% endblock content %} {% block personnaljs %}
+<script src="{% static 'main/js/contact.js' %}"></script>
+{% endblock %}

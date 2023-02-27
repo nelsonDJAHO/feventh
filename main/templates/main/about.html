@@ -1,0 +1,136 @@
+{% extends 'main/template.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+
+<!-- Start Breadcrumb Area -->
+<div class="breadcrumb-area" style="background-image: url('{% static 'main/assets/img/l5.jpg' %}');">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2>A-Propos De Nous</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb Area -->
+
+<!-- Start About Area -->
+<section class="about-area section-padding section-bg">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-6">
+                <div class="about-thumbnail">
+                    <img src="{% static 'main/assets/img/l2.jpg' %}" alt="about" />
+                </div>
+            </div>
+            <div class="col-lg-6 align-self-center">
+                <div class="about-content">
+                    <h5>A Propos De Notre Entreprise</h5>
+                    <h2> {{ company.Name }} - {{ company.Slogan }} </h2>
+                    <div class="about-content-navs-tab">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="aboutus-tab" data-bs-toggle="tab" data-bs-target="#aboutus" type="button" role="tab" aria-controls="aboutus" aria-selected="true">A-Propos</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="aboutus" role="tabpanel" aria-labelledby="aboutus-tab">
+                                <div class="about-content-navs-tab-content-full">
+                                    <div class="title">
+                                        <span> A-Propos De Nous</span>
+                                    </div>
+                                    <p>{{ company.CompanyAbout }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <h3>Pourquoi nous faire confiance ?</h3>
+            <div class="faq-full">
+                <div class="accordion" id="accordionExample">
+                    {% for item in whychooseus %}
+                    <!--  -->
+                    {% if item.id == firstwhychooseusid %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{item.id}}">
+                            <a href="#" data-bs-toggle="collapse" data-bs-target="#collapse{{item.id}}" aria-expanded="true" aria-controls="collapse{{item.id}}">
+                                <h4>{{item.Title}}</h4>
+                            </a>
+                        </h2>
+                        <div id="collapse{{item.id}}" class="accordion-collapse collapse show" aria-labelledby="heading{{item.id}}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p style="text-align:justify; word-wrap:break-word;">
+                                    {{item.Description}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    {% else %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <a class="collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse{{item.id}}" aria-expanded="false" aria-controls="collapse{{item.id}}">
+                                <h4>{{item.Title}}</h4>
+                            </a>
+                        </h2>
+                        <div id="collapse{{item.id}}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p style="text-align:justify; word-wrap:break-word;">
+                                    {{item.Description}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    {% endif %}
+                    <!--  -->
+                    {% endfor %}
+
+                    <!-- <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <a href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    When do I need an Interior Designer?
+                                                </a>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed nulla facilisis, gravida metus egestas, facilisis orci. Sed tincidunt pellentesque nisl, in vestibulum libero rhoncus nec. Integer at arcu eget massa sodales vehicula sed sit amet libero.
+                                    Donec elementum eget libero a interdum. Donec mollis dolor sit amet mi fermentum, ut vulputate nisl posuere. Maecenas fermentum enim vestibulum lorem lacinia blandit. Donec feugiat consequat nisl, vel semper tellus
+                                    elementum in. Sed nulla sem, dignissim in risus sit amet, pharetra convallis nulla. Mauris sit amet dui non est scelerisque dictum. In dapibus cursus hendrerit. Praesent a nulla eu mauris pharetra convallis.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <a class="collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Why do you have a design fee and purchasing fee on the product?
+                                                </a>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed nulla facilisis, gravida metus egestas, facilisis orci. Sed tincidunt pellentesque nisl, in vestibulum libero rhoncus nec. Integer at arcu eget massa sodales vehicula sed sit amet libero.
+                                    Donec elementum eget libero a interdum. Donec mollis dolor sit amet mi fermentum, ut vulputate nisl posuere. Maecenas fermentum enim vestibulum lorem lacinia blandit. Donec feugiat consequat nisl, vel semper tellus
+                                    elementum in. Sed nulla sem, dignissim in risus sit amet, pharetra convallis nulla. Mauris sit amet dui non est scelerisque dictum. In dapibus cursus hendrerit. Praesent a nulla eu mauris pharetra convallis.
+                                </p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Area -->
+
+{% endblock content %}

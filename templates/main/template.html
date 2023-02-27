@@ -1,0 +1,374 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ company.Name }} - {{ company.Slogan }}</title>
+    <link rel="icon" href="{{ company.CompanyLogo.url }}" type="image/gif" sizes="16x16" />
+    <link rel="icon" href="{{ company.CompanyLogo.url }}" type="image/gif" sizes="18x18" />
+    <link rel="icon" href="{{ company.CompanyLogo.url }}" type="image/gif" sizes="20x20" />
+
+    <link rel="stylesheet" href="{% static 'main/assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/fontawesome.all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/normalize.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/responsive.css' %}" />
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!-- Start HEader Area -->
+    <header class="header">
+        <!-- Header Top -->
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <!-- Top Left -->
+                    <div class="col-lg-6 align-self-center">
+                        <div class="top-info-left">
+                            <span><i class="fas fa-map-marker-alt"></i> 
+                                {% for address in firstCompanyAdress %}
+                                    {{ address.Address }}
+                                {% endfor %}
+                             </span>
+                            <span><i class="far fa-envelope"></i> 
+                                {% for email in firstCompanyEmail %}
+                                    {{ email.Email }}
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Top Right -->
+                    <div class="col-lg-6 align-self-center text-right">
+                        <div class="top-info-right">
+                            <div class="office-time">
+                                <span><i class="far fa-clock"></i> Horaires : {{company.OfficeHour}} </span>
+                            </div>
+                            <div class="top-social">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Bottom -->
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-xl-2 col-4">
+                        <div class="logo">
+                            <a href="{% url 'main:index' %}">
+                                <img src="{{ company.CompanyLogo.url }}" alt="logo" style="width:110px; height: 60px;" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-xl-10 col-8">
+                        <!-- Header Search -->
+                        <!-- <div class="header-search">
+                            <div class="header-search-icon">
+                                <i class="fas fa-search active"></i>
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="header-top-search-form">
+                                <div class="header-top-search-form-full">
+                                    <form action="#">
+                                        <input type="search" name="search" placeholder="Search Here.." />
+                                        <button type="submit"><i class="fas fa-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="canvas_open">
+                            <a href="javascript:void(0)">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        <!-- Menu -->
+                        <div class="menu">
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'main:index' %}">Acceuil</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'main:aboutCompanyView' %}">Entreprise</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'main:aboutCompanyView' %}">A-Propos</a></li>
+                                            <li><a href="{% url 'main:teamView' %}">Equipe</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'main:services' %}">Nos Services</a>
+                                        <ul class="sub-menu">
+                                            {% for service in services %}
+                                            <li><a href="{% url 'main:servicesdetails' service.id %}">{{ service.Title|truncatechars:50 }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'main:projects' %}">Nos Projets</a>
+                                    </li>
+                                    <li><a href="{% url 'main:contact' %}">Nous Contacter</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End HEader Area -->
+
+    <!-- Start Mobile Menu Area -->
+    <div class="mobile-menu-area">
+        <!--offcanvas menu area start-->
+        <div class="off_canvars_overlay"></div>
+        <div class="offcanvas_menu">
+            <div class="offcanvas_menu_wrapper">
+                <div class="canvas_close">
+                    <a href="javascript:void(0)"><i class="fas fa-times"></i></a>
+                </div>
+                <div class="mobile-logo">
+                    <a href="{% url 'main:index' %}">
+                        <img src="{{ company.CompanyLogo.url }}" alt="logo" />
+                    </a>
+                </div>
+                <div id="menu" class="text-left">
+                    <ul class="offcanvas_main_menu">
+                        <li>
+                            <a href="{% url 'main:index' %}">Acceuil</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="{% url 'main:aboutCompanyView' %}">Entreprise</a>
+                            <ul class="sub-menu">
+                                <li><a href="{% url 'main:aboutCompanyView' %}">A-Propos</a></li>
+                                <li><a href="{% url 'main:teamView' %}">Equipe</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="{% url 'main:services' %}">Nos Services</a>
+                            <!--  -->
+                            <ul class="sub-menu">
+                                {% for service in services %}
+                                <li><a href="{% url 'main:servicesdetails' service.id %}">{{ service.Title|truncatechars:50 }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:projects' %}">Nos Projets</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="{% url 'main:contact' %}"> Nous Contacter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--offcanvas menu area end-->
+
+
+    {% block content %}{% endblock content %}
+
+
+    <!-- Start Subscriber Area -->
+    <div class="subscribe-area pt-70 pb-70" style="background-image: url('{% static 'main/assets/img/l6.jpg' %}');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="subscribe-content">
+                        <h2>Abonnez-vous à notre newsletter</h2>
+                        <p>Souhaitez-vous être aux nouvelles de nos offres? </p>
+                    </div>
+                </div>
+                <div class="col-lg-5 align-self-center">
+                    <div class="subscribe-form">
+                        <form id="newsletterForm">
+                            {% csrf_token %}
+                            <input type="email" name="sub" id="emailAdress" placeholder="Email" required />
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Subscriber Area -->
+
+    <!-- Start Footer Area -->
+    <footer class="footer">
+        <!-- Footer Top -->
+        <div class="footer-top pt-70 pb-20">
+            <div class="container">
+                <div class="row">
+                    <!-- Single -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h2 class="title">A-Propos De Notre Entreprise</h2>
+                            <p class="text-justify">{{ company.CompanyAbout|truncatechars:100 }}</p>
+                            <div class="footer-call-btn">
+                                <div class="icon">
+                                    <i class="fas fa-phone-volume"></i>
+                                </div>
+                                <div class="con">
+                                    <p>Parlez A Notre Support</p>
+                                    <span>
+                                        {% for phonenumber in firstCompanyContact %}
+                                            {% if phonenumber.whatsapp %}
+                                                <a href="https://wa.me/{{phonenumber.PhoneNumber}}?text=Bonjour FEVENTH" style="color:#fff; font-size:15px;">{{ phonenumber.PhoneNumber }}</a>
+                                            {% else %}
+                                                <P style="font-size: 15px;">{{ phonenumber.PhoneNumber }}</P>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h2 class="title">Liens Rapides</h2>
+                            <ul>
+                                <li><a href="{% url 'main:index' %}">Acceuil</a></li>
+                                <li><a href="{% url 'main:aboutCompanyView' %}">Entreprise</a></li>
+                                <li><a href="{% url 'main:services' %}">Nos Services</a></li>
+                                <li><a href="{% url 'main:projects' %}">Nos Projets</a></li>
+                                <li><a href="{% url 'main:contact' %}">Nous Contacter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Single -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h2 class="title">Nos Services</h2>
+                            <ul>
+                                {% for service in services %}
+                                <li><a href="{% url 'main:servicesdetails' service.id %}">{{ service.Title|truncatechars:50 }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Latest news -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h2 class="title">Dernières publications</h2>
+                            <!-- <div class="f-w-l-blog">
+                                
+                                <div class="single">
+                                    <div class="thumbnail">
+                                        <a href="single.html">
+                                            <img src="assets/img/blog/1.jpg" alt="blog" />
+                                        </a>
+                                    </div>
+                                    <div class="cont">
+                                        <h4><a href="single.html">5 Easy Ways to Improve Your Web Security</a></h4>
+                                        <span><i class="far fa-calendar-alt"></i> 12 September 2021</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="single">
+                                    <div class="thumbnail">
+                                        <a href="single.html">
+                                            <img src="assets/img/blog/2.jpg" alt="blog" />
+                                        </a>
+                                    </div>
+                                    <div class="cont">
+                                        <h4><a href="single.html">5 Easy Ways to Improve Your Web Security</a></h4>
+                                        <span><i class="far fa-calendar-alt"></i> 12 September 2021</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="single">
+                                    <div class="thumbnail">
+                                        <a href="single.html">
+                                            <img src="assets/img/blog/3.jpg" alt="blog" />
+                                        </a>
+                                    </div>
+                                    <div class="cont">
+                                        <h4><a href="single.html">5 Easy Ways to Improve Your Web Security</a></h4>
+                                        <span><i class="far fa-calendar-alt"></i> 12 September 2021</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom -->
+        <div class="footer-bottom pt-30 pb-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="copy-text">
+                            <p>Copyright ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> <a href="{% url 'main:index' %}"> {{ company.Name }} </a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer Area -->
+    <!-- End Works About Area -->
+    <div class="scroll-area">
+        <i class="fa fa-angle-up"></i>
+    </div>
+
+    <!-- Js File -->
+    <script src="{% static 'main/assets/js/modernizr.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/mixitup.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/script.js' %}"></script>
+    <script src="{% static 'main/assets/js/mobile-menu.js' %}"></script>
+
+    <!-- Public scripts -->
+    <script src="{% static 'main/js/newsletter.js' %}"></script>
+
+    <!-- Personnal js file -->
+    {% block personnaljs %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+{% extends 'main/template.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+
+<!-- Start Breadcrumb Area -->
+<div class="breadcrumb-area" style="background-image: url('{% static 'main/assets/img/l5.jpg' %}');">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2>Nos Projets</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb Area -->
+
+<!-- Start Portfolio Area -->
+<section class="portfolio-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="portfolio-cate-list-full mb-50 text-center">
+                <ul>
+                    <li data-filter="all">All</li>
+                    {% for service in services %}
+                    <li data-filter=".filter-{{service.id}}">{{service.Title}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="row p-projects-full portF">
+                {% for project in projects %}
+                <div class="col-lg-4 col-md-6 mb-30 mix filter-{{project.Service.id}}">
+                    <div class="project-item">
+                        <div class="thumbnail">
+                            <img src="{{project.Poster.url}}" alt="project" />
+                        </div>
+                        <div class="info">
+                            <div class="info-item">
+                                <div class="left-info">
+                                    <h4><a href="{% url 'main:projectdetails' project.id %}">{{project.Title}}</a></h4>
+                                    <a class="cat" href="{% url 'main:servicesdetails' project.Service.id %}">{{project.Service.Title}}</a>
+                                </div>
+                                <div class="right-info">
+                                    <div class="img-gallery-popup">
+                                        <a href="{{project.Poster.url}}"><i class="fas fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- <div class="row mt-20">
+                <div class="col-12 text-center">
+                    <a class="button-1" href="#"><i class="fas fa-spinner fa-spin"></i> Load More</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+<!-- End Portfolio Area -->
+
+{% endblock content %}

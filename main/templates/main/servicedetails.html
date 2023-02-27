@@ -1,0 +1,114 @@
+{% extends 'main/template.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+
+<!-- Start Breadcrumb Area -->
+<div class="breadcrumb-area" style="background-image: url('{% static 'main/assets/img/l5.jpg' %}');">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2>Nos Services</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb Area -->
+
+<!-- Start Services Area -->
+<section class="services-area section-padding-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-30">
+                <div class="services-details">
+                    <div class="thumbnail">
+                        <img src="{{service.Poster.url }}" alt="img" />
+                    </div>
+                    <div class="content">
+                        <h2>{{ service.Title }}</h2>
+                        <p>
+                            {{ service.Description }}
+                        </p>
+
+                        <div class="row">
+                            <!-- Single -->
+                            <div class="col-lg-4 col-sm-6 mb-30">
+                                <div class="counter-item counter-item-2">
+                                    <div class="icon">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            <h2 class="counter">{{ completedprojects }}</h2>
+                                        </div>
+                                        <p>Projets Terminés</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single -->
+                            <div class="col-lg-4 col-sm-6 mb-30">
+                                <div class="counter-item counter-item-2">
+                                    <div class="icon">
+                                        <i class="fas fa-dna"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            <h2 class="counter">{{ remainingprojects }}</h2>
+                                        </div>
+                                        <p>Projets En Cours</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single -->
+                            <div class="col-lg-4 col-sm-6 mb-30">
+                                <div class="counter-item counter-item-2">
+                                    <div class="icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            <h2 class="counter">{{ team }}</h2>
+                                        </div>
+                                        <p>Equipe</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="services-single-wi mb-30">
+                    <div class="services-wi-category">
+                        <ul>
+                            {% for item in services %}
+                            <!--  -->
+                            {% if service.id == item.id %}
+                            <li>
+                                <a class="active" href="{% url 'main:servicesdetails' service.id %}"><i class="fas fa-angle-double-right"></i> {{ item.Title }}</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url 'main:servicesdetails' item.id %}"><i class="fas fa-angle-double-right"></i> {{ item.Title }}</a>
+                            </li>
+                            <!--  -->
+                            {% endif %}
+                            <!--  -->
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="services-single-wi">
+                    <img src="{% static 'main/assets/img/l2.jpg' %}" alt="img" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Services Area -->
+
+{% endblock content %}

@@ -1,0 +1,269 @@
+{% extends 'main/template.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+
+<!-- Start Hero Area -->
+<section class="hero-area">
+    <div class="hero-slider-full owl-carousel">
+        <!-- single -->
+        {% for baniere in banieres %}
+        <div class="hero-slider-item" style="background-image: url('{{baniere.Baniere.url}}');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="hero-lsider-caption">
+                            <h4>{{ baniere.Title }}</h4>
+                            <h2>{{ baniere.Description }}</h2>
+                            <a class="button-1" href="{% url 'main:contact' %}">Nous Contacter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+<!-- End Hero Area -->
+
+
+<!-- Start About Area -->
+<section class="about-area section-padding section-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-thumbnail">
+                    <img src="{% static 'main/assets/img/l2.jpg' %}" alt="about" />
+                </div>
+            </div>
+            <div class="col-lg-6 align-self-center">
+                <div class="about-content">
+                    <h5>A Propos De Notre Entreprise</h5>
+                    <h2> {{ company.Name }} - {{ company.Slogan }} </h2>
+                    <div class="about-content-navs-tab">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="aboutus-tab" data-bs-toggle="tab" data-bs-target="#aboutus" type="button" role="tab" aria-controls="aboutus" aria-selected="true">A-Propos</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="aboutus" role="tabpanel" aria-labelledby="aboutus-tab">
+                                <div class="about-content-navs-tab-content-full">
+                                    <div class="title">
+                                        <span> A-Propos De Nous</span>
+                                    </div>
+                                    <p>{{ company.CompanyAbout|truncatechars:200 }}</p>
+                                    <a class="button-1" href="{% url 'main:aboutCompanyView' %}">Lire plus</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Area -->
+
+<!-- Start Services Area Area -->
+<section class="services-area section-padding-2">
+    <div class="container">
+        <!-- Section Headding -->
+        <div class="row">
+            <div class="col-lg-12 mb-50 text-center">
+                <div class="section-headding">
+                    <h5>Nos Services</h5>
+                    <h2>
+                        Quelques un de nos <br /> Services
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for service in services %}
+            <div class="col-lg-4 col-md-6 mb-30">
+                <div class="info-box-1">
+                    <div class="info-box-1-inner">
+                        <div class="number-c">{{ service.id }}</div>
+                        <div class="icon">
+                            <i class="fas fa-pencil-ruler"></i>
+                        </div>
+                        <div class="content">
+                            <h3><a href="{% url 'main:servicesdetails' service.id %}">{{ service.Title }}</a></h3>
+                            <p>{{ service.Description|truncatechars:100 }}</p>
+                            <a href="{% url 'main:servicesdetails' service.id %}" class="link">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- End Services Area Area -->
+
+<!-- Start Works About Area -->
+<section class="works-about-area section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Content -->
+            <div class="col-lg-6 align-self-center">
+                <div class="works-about-content">
+                    <h5>Des Services De Qualité</h5>
+                    <h2>Approuvés Et Adoptés Par Nos Clients</h2>
+                    <p>
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.
+                    </p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 100% De Satisfaction Cliente</li>
+                        <li><i class="fas fa-check-circle"></i> Un Travail De Classe Modiale</li>
+                    </ul>
+                    <div class="btn-aa">
+                        <a class="button-2" href="{% url 'main:services' %}">Tous Nos Services</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Thumbnail -->
+            <div class="col-lg-6 align-self-center">
+                <div class="works-about-thumbanil">
+                    <div class="thumbnail">
+                        <img src="{% static 'main/assets/img/l6.jpg' %}" alt="img" />
+                    </div>
+                    <div class="works-about-vedio">
+                        <div class="video-btn">
+                            <!-- <a href="https://www.youtube.com/watch?v=sY2bdbsy3rg"><i class="fas fa-play"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Works About Area -->
+
+<!-- Start Latest Project Area -->
+<section class="latest-project-area pt-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-50 text-center">
+                <div class="section-headding">
+                    <h5>Derniers Projets</h5>
+                    <h2>Quelques-uns De Nos Projets</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-lg-4 col-md-6">
+            <div class="project-item">
+                <div class="thumbnail">
+                    <img src="{{ project.Poster.url }}" alt="project" />
+                </div>
+                <div class="info">
+                    <div class="info-item">
+                        <div class="left-info">
+                            <h4><a href="{% url 'main:projectdetails' project.id %}">{{ project.Title }}</a></h4>
+                            <a class="cat" href="{% url 'main:servicesdetails' project.Service.id %}">{{ project.Service.Title }}</a>
+                        </div>
+                        <div class="right-info">
+                            <div class="img-gallery-popup">
+                                <a href="{{ project.Poster.url }}"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- End Latest Project Area -->
+
+<!-- Start Counter Area -->
+
+<!-- End Counter Area -->
+
+<!-- Start We Provide Area -->
+<section class="web-prodive" style="background-image: url('{% static 'main/assets/img/l5.jpg' %}');">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="we-provide-content">
+                    <h2>Nous Fournissons Des Services Informatiques Externalisés Pour Les Petites Et Moyennes Entreprises</h2>
+                    <p>Adaptés De Façon Spécifique A Votre Entreprise, Ce Qui Vous Permet De Faciliter L'exercice De Vos Fonctions</p>
+                    <a class="button-2" href="{% url 'main:projects' %}">Tous Nos Projets</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End We Provide Area -->
+
+<!-- Start Testimonial Area -->
+<section class="testimonial-area">
+    <div class="container">
+        <div class="testimonial-area-full">
+            <div class="row">
+                <div class="col-lg-6 align-self-center">
+                    <div class="what-we-do-c">
+                        <h5>Ce Que Nous Faisons</h5>
+                        <h2>Nous Vous aidons A Développer Votre Entreprise De Manière Exponentielle</h2>
+                        <div class="ww-do">
+                            <div class="progress-bars wow fadeInUp" data-wow-delay=".1s">
+                                <div class="single-progress">
+                                    <h3>UI/UX Design</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar wow" style="width: 50%;">
+                                            <span class="percent">50%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress-bars wow fadeInUp" data-wow-delay=".1s">
+                                <div class="single-progress">
+                                    <h3>App Development</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar wow" style="width: 98%;">
+                                            <span class="percent">98%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="testimonial-item-full owl-carousel" style="background-image: url('{% static 'main/assets/img/provide.jpg' %}');">
+                        <!-- Single -->
+                        {% for testimonial in testimonials %}
+                        <div class="testimonial-item">
+                            <div class="thumbnail">
+                                <img style=" height:100px; width:100px;" src="{% static 'main/assets/img/avatar.png' %}" alt="img" />
+                            </div>
+                            <div class="content">
+                                <p>{{ testimonial.Comment }}</p>
+                                <div class="ratting">
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                    <span><i class="fas fa-star"></i></span>
+                                </div>
+                                <h4>{{ testimonial.Name }}</h4>
+                                <h5>{{ testimonial.Work }}</h5>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Testimonial Area -->
+
+<!--  -->
+{% endblock content %}
